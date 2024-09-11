@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "directus start"
+    "start": "directus start",
+    "save-snapshot": "directus schema "
   },
   "keywords": [],
   "author": "",
