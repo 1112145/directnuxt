@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "directus start",
-    "save-snapshot": "directus schema "
+    "start": "directus bootstrap && directus start",
+    "save": "directus schema snapshot ./snapshot.json --format=json",
+    "apply": "directus schema apply ./snapshot.json"
   },
   "keywords": [],
   "author": "",
