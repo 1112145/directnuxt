@@ -12,15 +12,5 @@
       "args": "run dev",
       "cwd": "/apps/website"
     }
-  ],
-  "deploy": {
-    "production": {
-      "user": "root",
-      "host": "212.38.94.107",
-      "ref": "origin/main",
-      "repo": "git@gitlab.com:sanyang/directnuxt.git",
-      "path": "~",
-      "post-deploy": "npm install && pm2 reload ecosystem.config.js --env production"
-    }
-  }
+  ]
 }
