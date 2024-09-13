@@ -1,0 +1,32 @@
+stages:
+ - deploy
+
+variables:
+  SSH_PRIVATE_KEY: "$CI_SSH_PRIVATE_KEY"
+  SSH_USER: "$CI_SSH_USER"
+  SSH_HOST: "$CI_SSH_HOST"
+  DEPLOY_PATH: "$CI_DEPLOY_PATH"
+
+before_script:
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+
+deploy_directus:
+  stage: deploy
+  script:
+    - ssh $SSH_USER@$SSH_HOST "cd $DEPLOY_PATH && pm2 startOrReload pm2.ecosystem.json --only directus"
+  rules:
+    - changes:
+      - apps/directus/**
+
+deploy_website:
+  stage: deploy
+  script:
+    - ssh $SSH_USER@$SSH_HOST "cd $DEPLOY_PATH && pm2 startOrReload pm2.ecosystem.json --only website"
+  rules:
+    - changes:
+      - apps/website/**
