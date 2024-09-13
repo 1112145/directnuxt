@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A website builder using Nuxt.js and Directus",
   "scripts": {
-  
+    "dev": "pm2 start pm2-dev.ecosystem.json"
   },
   "keywords": [],
   "author": "dangkhoaicao@gmail.com",

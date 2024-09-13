@@ -4,13 +4,13 @@
       "name": "directus",
       "script": "npm",
       "args": "run start",
-      "cwd": "/apps/directus"
+      "cwd": "./apps/directus"
     },
     {
       "name": "website",
       "script": "npm",
       "args": "run dev",
-      "cwd": "/apps/website"
+      "cwd": "./apps/website"
     }
   ]
 }
