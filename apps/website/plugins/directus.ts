@@ -1,6 +1,6 @@
-import { createDirectus, rest } from '@directus/sdk';
+import { createDirectus, readSingleton, rest, type DirectusClient, type RestClient } from '@directus/sdk';
 
-export default () => {
+export default async () => {
     
     const config = useRuntimeConfig();
 
@@ -8,12 +8,26 @@ export default () => {
 
     const directus = createDirectus(directusURL).with(rest());
 
-    console.log('Directus plugin loaded', directusURL);
+    const global = await fetchGlobal(directus);
 
 
     return {
         provide: {
-            directus
+            directus,
+            global
         }
     }
 };
+
+
+async function fetchGlobal(directus: RestClient<any>) {
+    try {
+        const global = await directus.request(readSingleton('global'));
+        return global;
+    } catch (error: any) { 
+        if (error.response.status === 403) {
+            console.log('You do not have permission to read the global singleton. Please set it to public in the Directus admin panel.');
+        }
+        return null;
+    }
+}
