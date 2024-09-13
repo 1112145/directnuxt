@@ -10,6 +10,7 @@ before_script:
   - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
   - eval $(ssh-agent -s)
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - echo "$DEPLOY_PATH"
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
   - ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
@@ -22,6 +23,7 @@ deploy_directus:
   rules:
     - changes:
       - apps/directus/**
+      - .gitlab-ci.yml
 
 deploy_website:
   stage: deploy
@@ -31,3 +33,4 @@ deploy_website:
   rules:
     - changes:
       - apps/website/**
+      - .gitlab-ci.yml
