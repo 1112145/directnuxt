@@ -16,7 +16,7 @@
   "deploy": {
     "production": {
       "user": "root",
-      "host": ["212.38.94.107"],
+      "host": "212.38.94.107",
       "ref": "origin/main",
       "repo": "git@gitlab.com:sanyang/directnuxt.git",
       "path": "~",
