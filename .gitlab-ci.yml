@@ -4,6 +4,7 @@ variables:
   SSH_USER: "$CI_SSH_USER"
   SSH_HOST: "$CI_SSH_HOST"
   DEPLOY_PATH: "$CI_DEPLOY_PATH"
+  GIT_CLONE_PATH: "/prod"
 
 before_script:
   - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
