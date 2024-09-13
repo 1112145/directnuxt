@@ -1,4 +1,4 @@
-import { createDirectus, readSingleton, rest, type DirectusClient, type RestClient } from '@directus/sdk';
+import { createDirectus, readItems, readSingleton, rest, type RestClient } from '@directus/sdk';
 
 export default async () => {
     
@@ -14,7 +14,8 @@ export default async () => {
     return {
         provide: {
             directus,
-            global
+            global, 
+            readItems
         }
     }
 };
