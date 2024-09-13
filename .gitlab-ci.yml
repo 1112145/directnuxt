@@ -1,6 +1,4 @@
 stages:
- - deploy
-
 variables:
   SSH_PRIVATE_KEY: "$CI_SSH_PRIVATE_KEY"
   SSH_USER: "$CI_SSH_USER"
@@ -18,6 +16,7 @@ before_script:
 deploy_directus:
   stage: deploy
   script:
+    - ssh $SSH_USER@$SSH_HOST "npm install -g pm2"
     - ssh $SSH_USER@$SSH_HOST "cd $DEPLOY_PATH && pm2 startOrReload pm2.ecosystem.json --only directus"
   rules:
     - changes:
@@ -26,6 +25,7 @@ deploy_directus:
 deploy_website:
   stage: deploy
   script:
+    - ssh $SSH_USER@$SSH_HOST "npm install -g pm2"
     - ssh $SSH_USER@$SSH_HOST "cd $DEPLOY_PATH && pm2 startOrReload pm2.ecosystem.json --only website"
   rules:
     - changes:
