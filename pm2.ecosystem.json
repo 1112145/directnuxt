@@ -19,7 +19,7 @@
       "host": ["212.38.94.107"],
       "ref": "origin/main",
       "repo": "git@gitlab.com:sanyang/directnuxt.git",
-      "path": "~/prod",
+      "path": "/",
       "post-deploy": "npm install && pm2 reload ecosystem.config.js --env production"
     }
   }
